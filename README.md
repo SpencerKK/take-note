@@ -23,3 +23,9 @@ My first MERN stack application. Took much influence from evernote. Users can cr
 `cd client`
 
 `npm install`
+
+`cd ../`
+
+#### **Run**
+
+`npm run dev`
