@@ -49,7 +49,7 @@ const Sidebar = ({
   useEffect(() => {
     getUserNotes();
     getUserNotebooks();
-  }, [getUserNotes]);
+  }, [getUserNotes, getUserNotebooks]);
 
   const toggleModal = () => {
     setModal(!modal);

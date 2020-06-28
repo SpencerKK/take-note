@@ -12,6 +12,7 @@ import {
 import 'draft-js/dist/Draft.css';
 import './EditorComponent.css';
 import Alert from '../layout/Alert';
+import OrgModal from '../layout/OrgModal/OrgModal';
 
 class EditorComponent extends React.Component {
   constructor(props) {
@@ -145,6 +146,7 @@ class EditorComponent extends React.Component {
             <button>Save</button>
           </form>
           <button onClick={() => onDelete()}>Delete</button>
+          <OrgModal />
         </div>
         <div className={className} onClick={this.focus}>
           <Alert />
