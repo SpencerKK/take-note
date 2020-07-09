@@ -11,12 +11,18 @@ import {
   Input,
 } from 'reactstrap';
 
-const OrgModal = ({ userNotebooks }) => {
+import { organizeNote } from '../../../actions/note';
 
+const OrgModal = ({ userNotebooks, note, organizeNote }) => {
   // Modal
   const [modal, setModal] = useState(false);
   const toggleModal = () => {
     setModal(!modal);
+  };
+
+  const handleOrg = (notebook, note) => {
+    organizeNote(note.id, notebook._id);
+    toggleModal();
   };
 
   if (userNotebooks.notebooks === null) {
@@ -26,15 +32,18 @@ const OrgModal = ({ userNotebooks }) => {
       <div>
         <button onClick={toggleModal}>Organize</button>
         <Modal isOpen={modal}>
-          <ModalHeader toggle={toggleModal}>
-            Move Note to...
-          </ModalHeader>
+          <ModalHeader toggle={toggleModal}>Move Note to...</ModalHeader>
           <ModalBody>
-            {
-              userNotebooks.notebooks.map(notebook => (
-                <p key={notebook._id}>{notebook.title}</p>
-              ))
-            }
+            {userNotebooks.notebooks.map((notebook) => (
+              <p
+                className="notebook-title"
+                onClick={() => handleOrg(notebook, note)}
+                key={notebook._id}
+              >
+                <i className="fas fa-book"></i>
+                {notebook.title}
+              </p>
+            ))}
           </ModalBody>
         </Modal>
       </div>
@@ -42,8 +51,9 @@ const OrgModal = ({ userNotebooks }) => {
   }
 };
 
-const mapStateToProps = state => ({
-  userNotebooks: state.userNotebooks
+const mapStateToProps = (state) => ({
+  note: state.note,
+  userNotebooks: state.userNotebooks,
 });
 
-export default connect(mapStateToProps)(OrgModal);
+export default connect(mapStateToProps, { organizeNote })(OrgModal);

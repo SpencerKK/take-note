@@ -1,8 +1,9 @@
-import { CREATE_NOTE, GET_USER_NOTES, SET_NOTE, DELETE_NOTE } from './types';
+import { CREATE_NOTE, GET_USER_NOTES, SET_NOTE, DELETE_NOTE, ORGANIZE_NOTE } from './types';
 import axios from 'axios';
 
 import { setAlert } from './alert';
 import setAuthToken from '../utils/setAuthToken';
+import { getUserNotebooks } from './notebook';
 
 // Select Note from the sidebar and display it in the editor
 export const setNote = (note) => async dispatch => {
@@ -25,6 +26,7 @@ export const getUserNotes = () => async dispatch => {
       type: GET_USER_NOTES,
       payload: res.data
     });
+    dispatch(getUserNotebooks());
   } catch (err) {
     throw err;
   }
@@ -58,15 +60,30 @@ export const createNote = ({ title, content }) => async dispatch => {
 };
 
 // Delete Note
-export const deleteNote = id => async dispatch => {
+export const deleteNote = (note_id) => async dispatch => {
   try {
-    await axios.delete('/api/note/' + id);
+    await axios.delete('/api/note/' + note_id);
 
     dispatch({
       type: DELETE_NOTE
     });
     dispatch(setAlert('Note Deleted', 'danger'));
     dispatch(getUserNotes());
+  } catch (err) {
+    console.error(err.message);
+  }
+};
+
+// Organize Note
+export const organizeNote = (note_id, notebook_id) => async dispatch => {
+  try {
+    await axios.put('/api/note/organize/' + note_id + '/' + notebook_id);
+
+    dispatch({
+      type: ORGANIZE_NOTE
+    });
+
+    dispatch(getUserNotebooks());
   } catch (err) {
     console.error(err.message);
   }

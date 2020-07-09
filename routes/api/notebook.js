@@ -3,9 +3,8 @@ const express = require('express');
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
 
-const Notebook = require('../../models/Notebook');
+const { Notebook } = require('../../models/Notebook');
 const authMid = require('../../middleware/authMid');
-const User = require('../../models/User');
 
 //  POST
 //  api/notebook
@@ -29,7 +28,6 @@ router.post(
     try {
       const { title } = req.body;
       let user = req.user.id;
-      let userModal = await User.findById(user);
 
       let existingNotebook = await Notebook.findOne({ title: title });
 
@@ -42,8 +40,6 @@ router.post(
           user,
         });
         notebook = await newNotebook.save();
-        userModal.notebooks.unshift(notebook);
-        await userModal.save();
         res.json(notebook);
       }
     } catch (err) {
@@ -73,22 +69,17 @@ router.get('/myNotebooks', authMid, async (req, res) => {
 //  Private
 router.delete('/:notebook_id', authMid, async (req, res) => {
   try {
-    let userModal = await User.findById(req.user.id);
     const notebook = await Notebook.findById(req.params.notebook_id);
+    const notebooks = await Notebook.find({ user: req.user.id });
 
     if (!notebook) {
       return res.status(404).json({ msg: 'Note not found' });
     }
-    const removeIndex = userModal.notebooks
-      .map((notebook) => notebook._id.toString())
-      .indexOf(req.params.notebook_id);
-
-    userModal.notebooks.splice(removeIndex, 1);
-    await userModal.save();
-
-    res.json(userModal);
 
     await notebook.remove();
+    res.json(notebooks);
+
+    res.json();
   } catch (err) {
     console.error(err.message);
   }

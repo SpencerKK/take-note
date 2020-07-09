@@ -272,6 +272,7 @@ const InlineStyleControls = (props) => {
 
 const mapStateToProps = state => ({
   note: state.note,
+  notebook: state.notebook,
   newNote: state.newNote
 });
 

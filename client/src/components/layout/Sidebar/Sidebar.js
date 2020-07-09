@@ -17,7 +17,7 @@ import {
   Input,
 } from 'reactstrap';
 
-import { getUserNotes, setNote } from '../../../actions/note';
+import { getUserNotes, setNote, deleteNote } from '../../../actions/note';
 import { newNote } from '../../../actions/newNote';
 import {
   createNotebook,
@@ -25,12 +25,13 @@ import {
   deleteNotebook,
   setNotebook,
 } from '../../../actions/notebook';
-import NBDropdown from "../NBDropdown/NBDropdown";
+import NBDropdown from '../NBDropdown/NBDropdown';
 
 const Sidebar = ({
   getUserNotes,
   userNotes,
   userNotebooks,
+  note,
   setNote,
   newNote,
   createNotebook,
@@ -120,11 +121,13 @@ const Sidebar = ({
           </ul>
           <ul className="notebooks-ul">
             <i className="fas fa-ellipsis-v" onClick={toggleNBModal}></i>
-            {
-              userNotebooks.notebooks.map(notebook => (
-                <NBDropdown key={notebook._id} title={notebook.title} />
-              ))
-            }
+            {userNotebooks.notebooks.map((notebook) => (
+              <NBDropdown
+                key={notebook._id}
+                title={notebook.title}
+                entries={notebook.entries}
+              />
+            ))}
           </ul>
         </div>
         <Modal isOpen={modal} className="text-center">

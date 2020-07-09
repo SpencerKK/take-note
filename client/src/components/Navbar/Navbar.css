@@ -5,6 +5,12 @@
   color: #fca311;
 }
 
+.site-logo {
+  width: 2em;
+  transform: translate(0, -0.5em);
+  margin-right: 0.5em;
+}
+
 .top-menu > .right {
   float: right;
   height: 3em;
@@ -39,6 +45,12 @@
     overflow: hidden;
     padding: 0;
     height: 4em;
+  }
+
+  .site-logo {
+    width: 2em;
+    transform: translate(0, 1em);
+    margin-right: 0.5em;
   }
 
   .top-menu > .right {

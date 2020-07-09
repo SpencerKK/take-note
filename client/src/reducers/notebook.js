@@ -1,7 +1,8 @@
 import { CREATE_NOTEBOOK, SET_NOTEBOOK, DELETE_NOTEBOOK } from '../actions/types';
 
 const initialState = {
-  title: ''
+  title: '',
+  id: null
 };
 
 export default (state = initialState, action) => {
@@ -9,12 +10,13 @@ export default (state = initialState, action) => {
     case CREATE_NOTEBOOK:
       return {
         ...state,
-        title: action.payload.title
+        title: action.payload.title,
       };
     case SET_NOTEBOOK:
       return {
         ...state,
-        title: action.payload.title
+        title: action.payload.title,
+        id: action.payload._id
       };
     case DELETE_NOTEBOOK:
       return {

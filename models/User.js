@@ -15,16 +15,6 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  notes: [
-    {
-      type: Object
-    }
-  ],
-  notebooks: [
-    {
-      type: Object
-    }
-  ],
   date: {
     type: Date,
     default: Date.now

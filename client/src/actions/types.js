@@ -22,3 +22,6 @@ export const CREATE_NOTEBOOK = 'CREATE_NOTEBOOK';
 export const GET_USER_NOTEBOOKS = 'GET_USER_NOTEBOOKS';
 export const DELETE_NOTEBOOK = 'DELETE_NOTEBOOK';
 export const SET_NOTEBOOK = 'SET_NOTEBOOK';
+
+// Organize
+export const ORGANIZE_NOTE = 'ORGANIZE_NOTE';
