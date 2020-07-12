@@ -51,6 +51,7 @@ export const createNote = ({ title, content }) => async dispatch => {
     });
     dispatch(getUserNotes());
     dispatch(setAlert('Note Saved!', 'success'));
+    dispatch(setNote(res.data));
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {

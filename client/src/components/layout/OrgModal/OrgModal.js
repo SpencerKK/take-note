@@ -2,13 +2,9 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import './OrgModal.css';
 import {
-  Button,
   Modal,
   ModalHeader,
   ModalBody,
-  Form,
-  FormGroup,
-  Input,
 } from 'reactstrap';
 
 import { organizeNote } from '../../../actions/note';

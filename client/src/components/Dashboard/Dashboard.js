@@ -14,7 +14,7 @@ const Dashboard = ({ isAuthenticated }) => {
   }
 
   return (
-    <div className='wrapper'>
+    <div className='dashboard-wrapper'>
       <div className='sidebar-wrapper'>
         <Sidebar />
       </div>

@@ -79,7 +79,7 @@ const Sidebar = ({
     return <div>loading...</div>;
   } else {
     return (
-      <div className="wrapper">
+      <div className="sidebar-wrapper">
         <div className="menu">
           <div className="search">
             <span>

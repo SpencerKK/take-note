@@ -29,7 +29,7 @@ router.post(
       const { title } = req.body;
       let user = req.user.id;
 
-      let existingNotebook = await Notebook.findOne({ title: title });
+      let existingNotebook = await Notebook.findOne({ title: title, user: user });
 
       if (existingNotebook) {
         // I'll do something here

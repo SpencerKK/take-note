@@ -11,6 +11,7 @@ import setAuthToken from './utils/setAuthToken';
 // Components
 import Navbar from './components/Navbar/Navbar';
 import Banner from './components/layout/Banner/Banner';
+import SubBanner from './components/layout/SubBanner/SubBanner';
 import Dashboard from './components/Dashboard/Dashboard';
 
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
         <div className='app-wrapper'>
           <Navbar />
           <Route exact path='/' component={Banner} />
+          <Route exact path='/' component={SubBanner} />
           <Switch>
             <Route exact path='/dashboard' component={Dashboard} />
           </Switch>

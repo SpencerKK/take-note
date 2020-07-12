@@ -1,9 +1,12 @@
+.sidebar-wrapper {
+  background: #000;
+}
+
 .menu {
   background: rgba(0, 0, 0, 0.877);
   height: 100vh;
   color: #fff;
   width: 15em;
-  height: 100vh;
 }
 
 /* Search */
@@ -31,6 +34,7 @@
 
 .fa-search {
   color: rgba(0, 0, 0, 0.822);
+  transform: translate(0, -0.2em);
 }
 
 /* List */
