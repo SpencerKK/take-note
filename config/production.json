@@ -1,4 +1,0 @@
-{
-  "mongoURI": "mongodb+srv://Spencer:0N5qfWw9CWmImZy3@journal-app-8byrv.mongodb.net/test?retryWrites=true&w=majority",
-  "jwtSecret": "888015ffggnore"
-}
