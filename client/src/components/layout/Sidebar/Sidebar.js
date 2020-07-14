@@ -17,7 +17,7 @@ import {
   Input,
 } from 'reactstrap';
 
-import { getUserNotes, setNote, deleteNote } from '../../../actions/note';
+import { getUserNotes, setNote } from '../../../actions/note';
 import { newNote } from '../../../actions/newNote';
 import {
   createNotebook,
@@ -40,6 +40,8 @@ const Sidebar = ({
   getUserNotebooks,
 }) => {
   const [title, setTitle] = useState('');
+  const [filterTerm, setFilterTerm] = useState('');
+  const [notesList, setNotesList] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
 
@@ -50,7 +52,8 @@ const Sidebar = ({
   useEffect(() => {
     getUserNotes();
     getUserNotebooks();
-  }, [getUserNotes, getUserNotebooks]);
+    filteredNotes();
+  }, [getUserNotes, getUserNotebooks, filterTerm]);
 
   const toggleModal = () => {
     setModal(!modal);
@@ -75,6 +78,22 @@ const Sidebar = ({
     setModal(!modal);
   };
 
+  // Filter Term
+  const filterNotes = (e) => {
+    e.preventDefault();
+    setFilterTerm(e.target.value);
+    setDropdownOpen(true);
+  };
+
+  const filteredNotes = () => {
+    if (userNotes.notes && userNotes.notes.length > 0) {
+      const newArr = userNotes.notes.filter(function (el) {
+        return el.title.includes(filterTerm);
+      });
+      setNotesList(newArr);
+    }
+  };
+
   if (userNotes.notes === null || userNotebooks.notebooks === null) {
     return <div>loading...</div>;
   } else {
@@ -85,7 +104,7 @@ const Sidebar = ({
             <span>
               <i className="fas fa-search"></i>
             </span>
-            <input />
+            <input onChange={(e) => filterNotes(e)} />
           </div>
           <ul>
             <li className="new-note" onClick={newNote}>
@@ -107,15 +126,28 @@ const Sidebar = ({
                 All Notes
               </DropdownToggle>
               <DropdownMenu className="drop-menu">
-                {userNotes.notes.map((note) => (
-                  <DropdownItem
-                    onClick={() => setNote(note)}
-                    key={note._id}
-                    className="drop-item"
-                  >
-                    {note.title}
-                  </DropdownItem>
-                ))}
+                {
+                  // Noteslist is the resulting array of those notes matching the search... If there is no matching, we just print 'all notes'
+                  notesList !== null
+                    ? notesList.map((note) => (
+                      <DropdownItem
+                        onClick={() => setNote(note)}
+                        key={note._id}
+                        className="drop-item"
+                      >
+                        {note.title}
+                      </DropdownItem>
+                    ))
+                    : userNotes.notes.map((note) => (
+                      <DropdownItem
+                        onClick={() => setNote(note)}
+                        key={note._id}
+                        className="drop-item"
+                      >
+                        {note.title}
+                      </DropdownItem>
+                    ))
+                }
               </DropdownMenu>
             </Dropdown>
           </ul>
