@@ -4,7 +4,7 @@ My first MERN stack application. Took much influence from evernote. Users can cr
 
 ## Screenshots
 
-![](client/src/img/screenshot.png)
+![sample photo](client/src/img/sample-photo.png)
 
 ## Todo
 
